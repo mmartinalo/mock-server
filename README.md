@@ -7,12 +7,12 @@ Logs all request recived
 
 First get dependencies:
 
-´´´sh
+~~~ sh
     npm install
-´´´
+~~~
 
 Run it:
 
-´´´sh
+~~~sh
     npm run serve
-´´´
+~~~
