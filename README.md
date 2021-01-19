@@ -14,5 +14,6 @@ First get dependencies:
 Run it:
 
 ~~~sh
-    npm run serve
+    npm run serve [--port=8888]
+    npm run serve-store-body # to store the body received into a file
 ~~~

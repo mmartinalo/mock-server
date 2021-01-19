@@ -1,6 +1,12 @@
 const http = require('http');
+const utils = require('./utils');
 
-const port = 8888
+// Parameters
+const port = require('yargs').argv.port ? port : 8888;
+const bodyToFile = require('yargs').argv.bodyToFile == true;
+
+if (bodyToFile) console.info("Flag bodyToFile set to true")
+
 const server = http.createServer((request, response) => {
   const requestStart = Date.now();
 
@@ -20,11 +26,12 @@ const server = http.createServer((request, response) => {
   response.on("finish", () => {
     const { rawHeaders, httpVersion, method, socket, url } = request;
     const { remoteAddress, remoteFamily } = socket;
+    const timestamp = Date.now();
 
     console.log(
       {
-        timestamp: Date.now(),
-        processingTime: Date.now() - requestStart,
+        timestamp: timestamp,
+        processingTime: timestamp - requestStart,
         rawHeaders,
         body,
         errorMessage,
@@ -35,6 +42,11 @@ const server = http.createServer((request, response) => {
         url
       }
     );
+
+    if (bodyToFile) {
+      utils.saveFile(`${timestamp}.log`, body);
+    }
+
   });
 
   process(request, response);
@@ -47,5 +59,5 @@ const process = (request, response) => {
 };
 
 
-console.log('Starting MockServer on ', 'localhost', ' and port ' , port)
+console.log('Starting MockServer on ', 'localhost', ' and port ', port)
 server.listen(port);

@@ -4,11 +4,14 @@
   "description": "Run a mock server on local to debug",
   "main": "main.js",
   "dependencies": {
-    "http": "^0.0.1-security"
+    "fs": "0.0.1-security",
+    "http": "^0.0.1-security",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "serve": "node main.js",
+    "serve-store-body": "node main.js --bodyToFile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
